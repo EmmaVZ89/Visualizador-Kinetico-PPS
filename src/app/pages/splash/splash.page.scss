@@ -1,16 +1,12 @@
 ion-content {
-  --background: rgb(191, 182, 182);
+  --background: rgb(246, 154, 4);
   --background: linear-gradient(
-    325deg,
-    rgba(191, 182, 182, 1) 14%,
-    rgba(0, 0, 0, 0.8468429608171394) 39%,
-    rgba(0, 0, 0, 1) 68%,
-    rgba(0, 0, 0, 1) 68%,
-    rgba(0, 0, 0, 1) 73%
+    15deg,
+    rgba(246, 154, 4, 1) 48%,
+    rgba(246, 219, 4, 1) 100%
   );
-
   p {
-    color: #fff;
+    color: #f00;
     font-size: 3rem;
     font-weight: bolder;
     text-shadow: 2px 2px 4px rgb(0, 0, 0);
@@ -36,6 +32,7 @@ ion-content {
   font-size: 1.8em;
   text-transform: uppercase;
   letter-spacing: 0.5em;
+  color: #000;
 }
 
 .ml12 .letter {

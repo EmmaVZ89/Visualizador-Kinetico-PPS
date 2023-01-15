@@ -49,6 +49,7 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   menuTittle: string = 'COSAS LINDAS';
   cosasLindasList: any = [];
   cosasFeasList: any = [];
+  imagenesUsuario: any = [];
   like: boolean = true;
   userImagesCosasLindas: boolean = false;
   userImagesCosasFeas: boolean = false;
@@ -79,15 +80,6 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
 
     Chart.register(...registerables);
   } // end of constructor
-
-  ngAfterViewInit(): void {
-    console.log(this.slides);
-    this.watch = this.deviceMotion
-      .watchAcceleration({ frequency: 500 })
-      .subscribe((acceleration: DeviceMotionAccelerationData) => {
-        this.handleAcceleration(acceleration);
-      });
-  }
 
   ngOnInit(): void {
     // Para formatear una fecha
@@ -123,22 +115,28 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ejeX:any = 0;
-  ejeY:any = 0;
-  ejeZ:any = 0;
-  handleAcceleration(acceleration: DeviceMotionAccelerationData) {
-    this.ejeX = acceleration.x;
-    this.ejeY = acceleration.y;
-    this.ejeZ = acceleration.z;
-    if (acceleration.x > 5) {
-      this.slides.slidePrev();
-    } else if (acceleration.x < -5) {
-      this.slides.slideNext();
-    }
+  ngAfterViewInit(): void {
+    this.watch = this.deviceMotion
+      .watchAcceleration({ frequency: 400 })
+      .subscribe((acceleration: DeviceMotionAccelerationData) => {
+        this.handleAcceleration(acceleration);
+      });
   }
 
   ngOnDestroy() {
     this.watch.unsubscribe();
+  }
+
+  handleAcceleration(acceleration: DeviceMotionAccelerationData) {
+    if (this.slides != undefined) {
+      if (acceleration.x > 5) {
+        this.slides.slidePrev();
+      } else if (acceleration.x < -5) {
+        this.slides.slideNext();
+      } else if (acceleration.y > 8) {
+        this.slides.slideTo(0, 500);
+      }
+    }
   }
 
   logoutUser() {
@@ -266,6 +264,22 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
       this.pressedButton = false;
       this.userImagesCosasLindas = true;
       this.userImagesCosasFeas = true;
+      this.imagenesUsuario = [];
+      if (this.menu == 1 && this.userImagesCosasLindas) {
+        for (let i = 0; i < this.cosasLindasList.length; i++) {
+          const item = this.cosasLindasList[i];
+          if (item.email == this.user.userEmail) {
+            this.imagenesUsuario.push(item);
+          }
+        }
+      } else if (this.menu == 2 && this.userImagesCosasFeas) {
+        for (let i = 0; i < this.cosasFeasList.length; i++) {
+          const item = this.cosasFeasList[i];
+          if (item.email == this.user.userEmail) {
+            this.imagenesUsuario.push(item);
+          }
+        }
+      }
     }, 2000);
   } // end of seeOwnImages
 
@@ -468,24 +482,4 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
       },
     });
   } // end of generateBarChart
-
-  goToSlide() {
-    let indice;
-    this.slides.getActiveIndex().then((i) => {
-      indice = i;
-      if (indice == 0) {
-        this.slides.slideTo(1, 500);
-      } else {
-        this.slides.slideTo(0, 500);
-      }
-    });
-  }
-
-  prevSlide() {
-    this.slides.slidePrev();
-  }
-  
-  nextSlide() {
-    this.slides.slideNext();
-  }
 }

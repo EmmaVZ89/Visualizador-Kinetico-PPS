@@ -22,13 +22,6 @@
           </button>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <div style="color: red">
-          <h4>X: {{ejeX}}</h4>
-          <h4>Y: {{ejeY}}</h4>
-          <h4>Z: {{ejeZ}}</h4>
-        </div>
-      </ion-row>
     </ion-grid>
   </div>
 
@@ -132,61 +125,78 @@
         <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.3rem">
           Listado de mis imágenes:
         </h2>
-        <div *ngFor="let item of this.cosasLindasList; let i = index">
-          <ion-card
-            style="border: 3px solid rgb(218, 218, 218); border-radius: 10px"
-            color="light"
-            *ngIf="item.email == user.userEmail"
-            data-index="i"
-          >
-            <div>
-              <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
-              <ion-card-header>
-                <ion-card-subtitle style="text-align: center"
-                  >{{item.hour}}</ion-card-subtitle
-                >
-              </ion-card-header>
-            </div>
-          </ion-card>
-        </div>
+
+        <ion-slides #slides>
+          <ion-slide *ngFor="let item of this.imagenesUsuario; let i = index">
+            <ion-card
+              style="
+                width: 100%;
+                height: 50vh;
+                border: 3px solid rgb(218, 218, 218);
+                border-radius: 10px;
+              "
+              color="light"
+              data-index="i"
+            >
+              <div>
+                <img class="img-cosas-lindas-usuario" src="{{item.pathFoto}}" />
+                <ion-card-header>
+                  <ion-card-subtitle style="text-align: center"
+                    >{{item.hour}}</ion-card-subtitle
+                  >
+                </ion-card-header>
+              </div>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
       </div>
 
       <!-- LISTADO DE IMAGENES COSAS FEAS -->
       <div style="margin-top: 1rem" *ngIf="menu == 2 && !userImagesCosasFeas">
-        <ion-card
-          style="border: 3px solid rgb(218, 218, 218); border-radius: 10px"
-          color="light"
-          *ngFor="let item of this.cosasFeasList; let i = index"
-          data-index="i"
-        >
-          <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
-          <ion-card-header>
-            <ion-card-title style="text-align: center"
-              >{{item.userName}}</ion-card-title
+        <ion-slides #slides>
+          <ion-slide
+            *ngFor="let item of this.cosasFeasList; let i = index"
+            data-index="i"
+          >
+            <ion-card
+              style="
+                width: 100%;
+                border: 3px solid rgb(218, 218, 218);
+                border-radius: 10px;
+              "
+              color="light"
+              data-index="i"
             >
-            <ion-card-subtitle style="text-align: center"
-              >{{item.hour}}</ion-card-subtitle
-            >
-          </ion-card-header>
-          <ion-card-content>
-            <ion-item class="btn-like-dislike-cl">
-              <ion-icon
-                style="color: #000"
-                name="checkmark-circle-outline"
-                slot="start"
-                *ngIf="item.likes.indexOf(user.userEmail) == -1"
-                (click)="voteImage(item, false)"
-              ></ion-icon>
-              <ion-icon
-                class="like-activado"
-                name="checkmark-circle-sharp"
-                slot="start"
-                *ngIf="item.likes.indexOf(user.userEmail) != -1"
-                (click)="voteImage(item, true)"
-              ></ion-icon>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
+              <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
+              <ion-card-header>
+                <ion-card-title style="text-align: center"
+                  >{{item.userName}}</ion-card-title
+                >
+                <ion-card-subtitle style="text-align: center"
+                  >{{item.hour}}</ion-card-subtitle
+                >
+              </ion-card-header>
+              <ion-card-content>
+                <ion-item class="btn-like-dislike-cl">
+                  <ion-icon
+                    style="color: #000"
+                    name="checkmark-circle-outline"
+                    slot="start"
+                    *ngIf="item.likes.indexOf(user.userEmail) == -1"
+                    (click)="voteImage(item, false)"
+                  ></ion-icon>
+                  <ion-icon
+                    class="like-activado"
+                    name="checkmark-circle-sharp"
+                    slot="start"
+                    *ngIf="item.likes.indexOf(user.userEmail) != -1"
+                    (click)="voteImage(item, true)"
+                  ></ion-icon>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
       </div>
 
       <!-- LISTADO DE IMAGENES COSAS FEAS PROPIAS DEL USUARIO -->
@@ -197,23 +207,29 @@
         <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.3rem">
           Listado de mis imágenes:
         </h2>
-        <div *ngFor="let item of this.cosasFeasList; let i = index">
-          <ion-card
-            style="border: 3px solid rgb(218, 218, 218); border-radius: 10px"
-            color="light"
-            *ngIf="item.email == user.userEmail"
-            data-index="i"
-          >
-            <div>
-              <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
-              <ion-card-header>
-                <ion-card-subtitle style="text-align: center"
-                  >{{item.hour}}</ion-card-subtitle
-                >
-              </ion-card-header>
-            </div>
-          </ion-card>
-        </div>
+        <ion-slides #slides>
+          <ion-slide *ngFor="let item of this.imagenesUsuario; let i = index">
+            <ion-card
+              style="
+                width: 100%;
+                height: 50vh;
+                border: 3px solid rgb(218, 218, 218);
+                border-radius: 10px;
+              "
+              color="light"
+              data-index="i"
+            >
+              <div>
+                <img class="img-cosas-lindas-usuario" src="{{item.pathFoto}}" />
+                <ion-card-header>
+                  <ion-card-subtitle style="text-align: center"
+                    >{{item.hour}}</ion-card-subtitle
+                  >
+                </ion-card-header>
+              </div>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
       </div>
     </ion-grid>
   </div>

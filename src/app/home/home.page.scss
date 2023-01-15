@@ -1,0 +1,184 @@
+// MENU PRINCIPAL
+ion-content {
+  --background: rgb(191, 182, 182);
+  --background: linear-gradient(
+    325deg,
+    rgba(191, 182, 182, 1) 14%,
+    rgba(0, 0, 0, 0.8468429608171394) 39%,
+    rgba(0, 0, 0, 1) 68%,
+    rgba(0, 0, 0, 1) 68%,
+    rgba(0, 0, 0, 1) 73%
+  );
+  overflow: hidden;
+  position: relative;
+  .cosas-lindas-btn {
+    background: url("../../assets/cosa-linda.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    border: 3px solid rgb(255, 255, 255);
+    text-align: center;
+    margin-bottom: 10px;
+    height: 40vh;
+    h2 {
+      font-size: 1.8rem;
+      font-weight: bolder;
+      line-height: 14rem;
+      background: rgba(0, 0, 0, 0.212);
+      border-radius: 15px;
+      text-shadow: 2px 2px 4px #000;
+    }
+  }
+  .cosas-lindas-btn:active {
+    transform: scale(0.9);
+    transition: transform 0.3s;
+  }
+  .cosas-feas-btn {
+    background: url("../../assets/cosa-fea3.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    border: 3px solid rgb(255, 255, 255);
+    text-align: center;
+    box-shadow: 2px 2px 3px #000;
+    height: 40vh;
+    h2 {
+      font-size: 1.8rem;
+      font-weight: bolder;
+      line-height: 14rem;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 15px;
+      text-shadow: 2px 2px 4px #000;
+    }
+  }
+  .cosas-feas-btn:active {
+    transform: scale(0.9);
+    transition: transform 0.3s;
+  }
+  .btn-danger {
+    width: 15rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #fff;
+    box-shadow: 2px 2px 3px #000;
+  }
+  .btn-danger:active {
+    transform: scale(1.1);
+    transition: transform 0.3s;
+  }
+}
+
+ion-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15rem;
+  height: 15rem;
+}
+
+// MENU COSAS LINDAS Y FEAS
+.btns-cosas-lindas {
+  width: 45%;
+  color: #fff;
+  text-align: center;
+  border: 2px solid #fff;
+  border-radius: 10px;
+}
+.btns-cosas-lindas:active {
+  transform: scale(0.9);
+  transition: transform 0.3s;
+}
+.btn-menu-cl {
+  background: black;
+}
+.btn-sesion-cl {
+  background: rgb(168, 28, 28);
+}
+
+.mis-fotos,
+.grafico {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.mis-fotos:active,
+.grafico:active {
+  transform: scale(0.9);
+  transition: transform 0.3s;
+}
+.grafico {
+  width: 13rem;
+  background: black;
+  color: #fff;
+  border: 3px solid #444;
+}
+
+.btn-tomar-foto {
+  display: block;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  height: 18rem;
+  background: url("../../assets/camara-mod.png");
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  border: 3px solid rgb(255, 255, 255);
+  text-align: center;
+  h2 {
+    font-size: 1.8rem;
+    font-weight: bolder;
+    line-height: 16rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    text-shadow: 3px 3px 8px #000;
+  }
+}
+.btn-tomar-foto:active {
+  transform: scale(0.9);
+  transition: transform 0.3s;
+}
+
+// LISTADO COSAS LINDAS y FEAS
+.img-cosas-lindas {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+}
+
+.btn-like-dislike-cl {
+  --background: rgb(160, 221, 198);
+  ion-icon {
+    width: 3rem;
+    height: 3rem;
+    margin-left: 40%;
+  }
+}
+
+.like-activado {
+  color: rgb(1, 143, 1);
+}
+
+// PIPE Y BAR CHART
+
+.pipe-chart-container,
+.bar-chart-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 50vh!important;
+  margin: auto;
+  margin-top: 2rem;
+}

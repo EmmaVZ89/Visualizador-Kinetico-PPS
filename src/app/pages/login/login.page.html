@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Relevamiento Visual</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-scroll>
+  <div class="container">
+    <img src="../../../assets/relevamientoVIsual.png" class="logo" />
+    <div class="noFoto">
+      <form (ngSubmit)="loginUser()" #f="ngForm">
+        <ion-item class="items">
+          <ion-label position="floating" style="color: black"
+            >Dirección de Correo</ion-label
+          >
+          <ion-input
+          style="color: #000;"
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item class="items">
+          <ion-label position="floating">
+            <ion-text color="light">Contraseña</ion-text>
+          </ion-label>
+          <ion-input
+            color="light"
+            [(ngModel)]="password"
+            name="clave"
+            type="password"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-button class="botones" expand="block" type="submit">
+          <ion-text> Iniciar sesión </ion-text>
+        </ion-button>
+      </form>
+
+      <div class="containerButtons">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="4">
+              <button class="ionButton" (click)="loadFastUser(1)"
+                >Admin</button
+              >
+            </ion-col>
+            <ion-col size="4">
+              <button class="ionButton" (click)="loadFastUser(3)"
+                >Usuario</button
+              >
+            </ion-col>
+            <ion-col size="4">
+              <button class="ionButton" (click)="loadFastUser(2)"
+                >Invitado</button
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+</ion-content>

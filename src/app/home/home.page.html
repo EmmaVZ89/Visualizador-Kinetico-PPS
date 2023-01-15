@@ -1,0 +1,264 @@
+<ion-content>
+  <!-- MENU BOTONES INICIALES -->
+  <div style="width: 100%; height: 100%" *ngIf="menu == 0">
+    <ion-grid style="display: flex; flex-flow: column">
+      <ion-row style="flex-grow: 1; margin-bottom: 1rem">
+        <ion-col class="cosas-lindas-btn" (click)="chooseMenu(1)">
+          <h2>COSAS LINDAS</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row style="flex-grow: 1; margin-bottom: 1rem">
+        <ion-col class="cosas-feas-btn" (click)="chooseMenu(2)">
+          <h2>COSAS FEAS</h2>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid style="display: flex; flex-flow: column">
+      <ion-row style="flex-grow: 1">
+        <ion-col>
+          <button class="btn btn-danger" (click)="logoutUser()">
+            Cerrar Sesión
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- MENU COSAS LINDAS Y FEAS-->
+  <div style="width: 100%; height: 100%" *ngIf="menu == 1 || menu == 2">
+    <ion-grid style="height: 10%">
+      <ion-row style="flex-grow: 1">
+        <ion-col style="display: flex; justify-content: space-between">
+          <button
+            class="btn btn-menu-cl btns-cosas-lindas"
+            (click)="chooseMenu(0)"
+          >
+            Menu Principal
+          </button>
+          <button
+            class="btn btn-sesion-cl btns-cosas-lindas"
+            (click)="logoutUser()"
+          >
+            Cerrar Sesión
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid style="height: 80%; display: flex; flex-flow: column">
+      <h1
+        style="
+          text-align: center;
+          font-size: 2rem;
+          margin-top: 1.5rem;
+          font-weight: bolder;
+        "
+      >
+        {{menuTittle}}
+      </h1>
+
+      <div *ngIf="!userImagesCosasLindas && !userImagesCosasFeas">
+        <h2 class="mis-fotos" (click)="seeOwnImages()">Mis Imágenes</h2>
+        <div class="btn-tomar-foto" (click)="addPhotoToGallery()">
+          <h2>TOMAR FOTO</h2>
+        </div>
+        <h2 *ngIf="menu==1" class="grafico" (click)="chooseMenu(3)">
+          Ver Gráfico
+        </h2>
+        <h2 *ngIf="menu==2" class="grafico" (click)="chooseMenu(4)">
+          Ver Gráfico
+        </h2>
+      </div>
+
+      <!-- LISTADO DE IMAGENES COSAS LINDAS -->
+      <div style="margin-top: 1rem" *ngIf="menu == 1 && !userImagesCosasLindas">
+        <ion-card
+          style="border: 3px solid rgb(218, 218, 218); border-radius: 10px"
+          color="light"
+          *ngFor="let item of this.cosasLindasList; let i = index"
+          data-index="i"
+        >
+          <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
+          <ion-card-header>
+            <ion-card-title style="text-align: center"
+              >{{item.userName}}</ion-card-title
+            >
+            <ion-card-subtitle style="text-align: center"
+              >{{item.hour}}</ion-card-subtitle
+            >
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item class="btn-like-dislike-cl">
+              <ion-icon
+                style="color: #000"
+                name="checkmark-circle-outline"
+                slot="start"
+                *ngIf="item.likes.indexOf(user.userEmail) == -1"
+                (click)="voteImage(item, false)"
+              ></ion-icon>
+              <ion-icon
+                class="like-activado"
+                name="checkmark-circle-sharp"
+                slot="start"
+                *ngIf="item.likes.indexOf(user.userEmail) != -1"
+                (click)="voteImage(item, true)"
+              ></ion-icon>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- LISTADO DE IMAGENES COSAS LINDAS PROPIAS DEL USUARIO -->
+      <div style="margin-top: 1rem" *ngIf="menu == 1 && userImagesCosasLindas">
+        <h2 style="text-align: center; margin-bottom: 2rem">
+          {{user.userName}}
+        </h2>
+        <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.3rem">
+          Listado de mis imágenes:
+        </h2>
+        <div *ngFor="let item of this.cosasLindasList; let i = index">
+          <ion-card
+            style="border: 3px solid rgb(218, 218, 218); border-radius: 10px"
+            color="light"
+            *ngIf="item.email == user.userEmail"
+            data-index="i"
+          >
+            <div>
+              <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
+              <ion-card-header>
+                <ion-card-subtitle style="text-align: center"
+                  >{{item.hour}}</ion-card-subtitle
+                >
+              </ion-card-header>
+            </div>
+          </ion-card>
+        </div>
+      </div>
+
+      <!-- LISTADO DE IMAGENES COSAS FEAS -->
+      <div style="margin-top: 1rem" *ngIf="menu == 2 && !userImagesCosasFeas">
+        <ion-card
+          style="border: 3px solid rgb(218, 218, 218); border-radius: 10px"
+          color="light"
+          *ngFor="let item of this.cosasFeasList; let i = index"
+          data-index="i"
+        >
+          <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
+          <ion-card-header>
+            <ion-card-title style="text-align: center"
+              >{{item.userName}}</ion-card-title
+            >
+            <ion-card-subtitle style="text-align: center"
+              >{{item.hour}}</ion-card-subtitle
+            >
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item class="btn-like-dislike-cl">
+              <ion-icon
+                style="color: #000"
+                name="checkmark-circle-outline"
+                slot="start"
+                *ngIf="item.likes.indexOf(user.userEmail) == -1"
+                (click)="voteImage(item, false)"
+              ></ion-icon>
+              <ion-icon
+                class="like-activado"
+                name="checkmark-circle-sharp"
+                slot="start"
+                *ngIf="item.likes.indexOf(user.userEmail) != -1"
+                (click)="voteImage(item, true)"
+              ></ion-icon>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- LISTADO DE IMAGENES COSAS FEAS PROPIAS DEL USUARIO -->
+      <div style="margin-top: 1rem" *ngIf="menu == 2 && userImagesCosasFeas">
+        <h2 style="text-align: center; margin-bottom: 2rem">
+          {{user.userName}}
+        </h2>
+        <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.3rem">
+          Listado de mis imágenes:
+        </h2>
+        <div *ngFor="let item of this.cosasFeasList; let i = index">
+          <ion-card
+            style="border: 3px solid rgb(218, 218, 218); border-radius: 10px"
+            color="light"
+            *ngIf="item.email == user.userEmail"
+            data-index="i"
+          >
+            <div>
+              <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
+              <ion-card-header>
+                <ion-card-subtitle style="text-align: center"
+                  >{{item.hour}}</ion-card-subtitle
+                >
+              </ion-card-header>
+            </div>
+          </ion-card>
+        </div>
+      </div>
+    </ion-grid>
+  </div>
+
+  <!-- PIPE CHART -->
+  <div *ngIf="menu == 3">
+    <script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+    <ion-row style="flex-grow: 1">
+      <ion-col style="display: flex; justify-content: space-between">
+        <button
+          class="btn btn-menu-cl btns-cosas-lindas"
+          (click)="chooseMenu(0)"
+        >
+          Menu Principal
+        </button>
+        <button
+          class="btn btn-sesion-cl btns-cosas-lindas"
+          (click)="logoutUser()"
+        >
+          Cerrar Sesión
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <h2 style="text-align: center; margin-top: 3rem; font-size: 2.3rem">
+      GRÁFICO DE COSAS LINDAS
+    </h2>
+    <div class="pipe-chart-container">
+      <canvas id="pipeChart"></canvas>
+    </div>
+  </div>
+
+  <!-- BAR CHART -->
+  <div *ngIf="menu == 4">
+    <ion-row style="flex-grow: 1">
+      <ion-col style="display: flex; justify-content: space-between">
+        <button
+          class="btn btn-menu-cl btns-cosas-lindas"
+          (click)="chooseMenu(0)"
+        >
+          Menu Principal
+        </button>
+        <button
+          class="btn btn-sesion-cl btns-cosas-lindas"
+          (click)="logoutUser()"
+        >
+          Cerrar Sesión
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <h2 style="text-align: center; margin-top: 5rem; font-size: 2.3rem">
+      GRÁFICO DE COSAS FEAS
+    </h2>
+    <div class="bar-chart-container">
+      <canvas id="pipeChart"></canvas>
+    </div>
+  </div>
+  <ion-spinner
+    *ngIf="pressedButton"
+    color="secondary"
+    name="lines"
+  ></ion-spinner>
+</ion-content>

@@ -20,6 +20,11 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 // Auth Service
 import { AuthService } from './services/auth.service';
 
+import {
+  DeviceMotion,
+  DeviceMotionAccelerationData,
+} from '@ionic-native/device-motion/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -33,7 +38,7 @@ import { AuthService } from './services/auth.service';
     AngularFireAuthModule,
     AngularFireStorageModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },DeviceMotion],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

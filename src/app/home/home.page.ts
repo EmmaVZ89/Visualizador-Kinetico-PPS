@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FirestoreService } from '../services/firestore.service';
@@ -19,12 +25,24 @@ import {
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
+import { IonSlides } from '@ionic/angular';
+import { ViewChild } from '@angular/core';
+
+import {
+  DeviceMotion,
+  DeviceMotionAccelerationData,
+} from '@ionic-native/device-motion/ngx';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('slides', { static: false }) slides: IonSlides;
+  watch: any;
+  currentSlide = 0;
+
   user: any = null;
   menu: number = 0;
   pressedButton: boolean = false;
@@ -43,7 +61,8 @@ export class HomePage implements OnInit {
     private authService: AuthService,
     private photoService: PhotoService,
     private firestoreService: FirestoreService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private deviceMotion: DeviceMotion
   ) {
     Chart.register(
       BarElement,
@@ -60,6 +79,15 @@ export class HomePage implements OnInit {
 
     Chart.register(...registerables);
   } // end of constructor
+
+  ngAfterViewInit(): void {
+    console.log(this.slides);
+    this.watch = this.deviceMotion
+      .watchAcceleration({ frequency: 500 })
+      .subscribe((acceleration: DeviceMotionAccelerationData) => {
+        this.handleAcceleration(acceleration);
+      });
+  }
 
   ngOnInit(): void {
     // Para formatear una fecha
@@ -93,6 +121,24 @@ export class HomePage implements OnInit {
         // this.router.navigate(['/login']);
       }
     });
+  }
+
+  ejeX:any = 0;
+  ejeY:any = 0;
+  ejeZ:any = 0;
+  handleAcceleration(acceleration: DeviceMotionAccelerationData) {
+    this.ejeX = acceleration.x;
+    this.ejeY = acceleration.y;
+    this.ejeZ = acceleration.z;
+    if (acceleration.x > 5) {
+      this.slides.slidePrev();
+    } else if (acceleration.x < -5) {
+      this.slides.slideNext();
+    }
+  }
+
+  ngOnDestroy() {
+    this.watch.unsubscribe();
   }
 
   logoutUser() {
@@ -422,4 +468,24 @@ export class HomePage implements OnInit {
       },
     });
   } // end of generateBarChart
+
+  goToSlide() {
+    let indice;
+    this.slides.getActiveIndex().then((i) => {
+      indice = i;
+      if (indice == 0) {
+        this.slides.slideTo(1, 500);
+      } else {
+        this.slides.slideTo(0, 500);
+      }
+    });
+  }
+
+  prevSlide() {
+    this.slides.slidePrev();
+  }
+  
+  nextSlide() {
+    this.slides.slideNext();
+  }
 }

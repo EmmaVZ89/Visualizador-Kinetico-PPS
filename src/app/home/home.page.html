@@ -22,6 +22,13 @@
           </button>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <div style="color: red">
+          <h4>X: {{ejeX}}</h4>
+          <h4>Y: {{ejeY}}</h4>
+          <h4>Z: {{ejeZ}}</h4>
+        </div>
+      </ion-row>
     </ion-grid>
   </div>
 
@@ -72,40 +79,49 @@
 
       <!-- LISTADO DE IMAGENES COSAS LINDAS -->
       <div style="margin-top: 1rem" *ngIf="menu == 1 && !userImagesCosasLindas">
-        <ion-card
-          style="border: 3px solid rgb(218, 218, 218); border-radius: 10px"
-          color="light"
-          *ngFor="let item of this.cosasLindasList; let i = index"
-          data-index="i"
-        >
-          <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
-          <ion-card-header>
-            <ion-card-title style="text-align: center"
-              >{{item.userName}}</ion-card-title
+        <ion-slides #slides>
+          <ion-slide
+            *ngFor="let item of this.cosasLindasList; let i = index"
+            data-index="i"
+          >
+            <ion-card
+              style="
+                width: 100%;
+                border: 3px solid rgb(218, 218, 218);
+                border-radius: 10px;
+              "
+              color="light"
             >
-            <ion-card-subtitle style="text-align: center"
-              >{{item.hour}}</ion-card-subtitle
-            >
-          </ion-card-header>
-          <ion-card-content>
-            <ion-item class="btn-like-dislike-cl">
-              <ion-icon
-                style="color: #000"
-                name="checkmark-circle-outline"
-                slot="start"
-                *ngIf="item.likes.indexOf(user.userEmail) == -1"
-                (click)="voteImage(item, false)"
-              ></ion-icon>
-              <ion-icon
-                class="like-activado"
-                name="checkmark-circle-sharp"
-                slot="start"
-                *ngIf="item.likes.indexOf(user.userEmail) != -1"
-                (click)="voteImage(item, true)"
-              ></ion-icon>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
+              <img class="img-cosas-lindas" src="{{item.pathFoto}}" />
+              <ion-card-header>
+                <ion-card-title style="text-align: center"
+                  >{{item.userName}}</ion-card-title
+                >
+                <ion-card-subtitle style="text-align: center"
+                  >{{item.hour}}</ion-card-subtitle
+                >
+              </ion-card-header>
+              <ion-card-content>
+                <ion-item class="btn-like-dislike-cl">
+                  <ion-icon
+                    style="color: #000"
+                    name="checkmark-circle-outline"
+                    slot="start"
+                    *ngIf="item.likes.indexOf(user.userEmail) == -1"
+                    (click)="voteImage(item, false)"
+                  ></ion-icon>
+                  <ion-icon
+                    class="like-activado"
+                    name="checkmark-circle-sharp"
+                    slot="start"
+                    *ngIf="item.likes.indexOf(user.userEmail) != -1"
+                    (click)="voteImage(item, true)"
+                  ></ion-icon>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
       </div>
 
       <!-- LISTADO DE IMAGENES COSAS LINDAS PROPIAS DEL USUARIO -->
@@ -256,6 +272,7 @@
       <canvas id="pipeChart"></canvas>
     </div>
   </div>
+
   <ion-spinner
     *ngIf="pressedButton"
     color="secondary"

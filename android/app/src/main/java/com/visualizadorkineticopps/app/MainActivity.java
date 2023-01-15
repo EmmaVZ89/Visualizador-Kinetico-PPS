@@ -1,4 +1,4 @@
-package com.relevamientovisualpps.app;
+package com.visualizadorkineticopps.app;
 
 import com.getcapacitor.BridgeActivity;
 

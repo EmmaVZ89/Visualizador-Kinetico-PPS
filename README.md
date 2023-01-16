@@ -56,7 +56,7 @@ FEAS del edificio).</li>
  <hr>
  
  <hr>
- <h2 align="center">GALERIAS DE IMÁGENES</h2>
+ <h2 align="center">GALERÍAS DE IMÁGENES</h2>
  <p align="center">Las galerias de imágenes responden al movimiento del dispositivo para cambiar la foto.</p>
  <p align="center">
    <img width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/3-galeria-cl.gif">
@@ -65,34 +65,37 @@ FEAS del edificio).</li>
  <hr>
  
  <hr>
- <h2 align="center">MAPA</h2>
- <p align="center">Es posible seleccionar el punto de destino desde un mapa.</p>
+ <h2 align="center">MENU LATERAL</h2>
  <p align="center">
-   <img width=200 src="https://github.com/EmmaVZ89/Despertador-por-GPS-PPS/blob/main/readme/4-mapa.gif">
+   <img width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/4-menu.gif">
  </p>
  <hr>
  
  <hr>
- <h2 align="center">ALARMA</h2>
- <p align="center">Se debe seleccionar la distancia mínima para indicar en que punto se quiere que se accione la alarma, luego hay que presionar el botón ACTIVAR.</p>
+ <h2 align="center">VOTO</h2>
+ <p align="center">Se puede dar o quitar el voto a una imágen.</p>
  <p align="center">
-   <img width=200 src="https://github.com/EmmaVZ89/Despertador-por-GPS-PPS/blob/main/readme/5-alarma.gif">
+   <img width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/5-voto.gif">
  </p>
  <hr>
  
  <hr>
- <h2 align="center">HISTORIAL</h2>
- <p align="center">Es posible ver el historial de alarmas del usuario que inició sesión.</p>
+ <h2 align="center">SUBIR FOTO</h2>
+ <p align="center">Es posible subir una foto con la cámara del dispositivo.</p>
  <p align="center">
-   <img width=200 src="https://github.com/EmmaVZ89/Despertador-por-GPS-PPS/blob/main/readme/6-historial.gif">
+   <img width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/7-subir-foto.gif">
  </p>
  <hr>
   
  <hr>
  <h2 align="center">VISTAS</h2>
- <img align="left" width=200 src="https://github.com/EmmaVZ89/Despertador-por-GPS-PPS/blob/main/readme/7%20inicio.png">
- <img align="left" width=200 src="https://github.com/EmmaVZ89/Despertador-por-GPS-PPS/blob/main/readme/8%20principal.png">
- <img align="left" width=200 src="https://github.com/EmmaVZ89/Despertador-por-GPS-PPS/blob/main/readme/9%20distancias.png">
- <img align="left" width=200 src="https://github.com/EmmaVZ89/Despertador-por-GPS-PPS/blob/main/readme/10%20historial.png">
- <img align="left" width=200 src="https://github.com/EmmaVZ89/Despertador-por-GPS-PPS/blob/main/readme/11%20buscador.png">
+ <img align="left" width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/8%20login.png">
+ <img align="left" width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/9%20principal.png">
+ <img align="left" width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/10%20menu.png">
+ <img align="left" width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/11%20galeria%20usuario.png">
+ <img align="left" width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/13%20galeria%20cf.png">
+ <img align="left" width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/14%20galeria%20usuario%20cf.png">
+ <img align="left" width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/12%20chart.png">
+ <img align="left" width=200 src="https://github.com/EmmaVZ89/Visualizador-Kinetico-PPS/blob/main/readme/15%20chart%20cf.png">
+
  

@@ -1,8 +1,48 @@
 <ion-content>
   <!-- MENU BOTONES INICIALES -->
   <div style="width: 100%; height: 100%" *ngIf="menu == 0">
+    <ion-menu contentId="main-content">
+      <ion-header>
+        <ion-toolbar color="light">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" style="--background: rgb(255, 217, 157)"
+        ><ion-grid style="display: flex; flex-flow: column">
+          <ion-row style="flex-grow: 1">
+            <ion-col>
+              <button class="btn btn-danger" (click)="logoutUser()">
+                Cerrar Sesión
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid></ion-content
+      >
+    </ion-menu>
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar style="background: #fff" color="dark">
+          <ion-buttons slot="start" style="color: #000">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title style="display: inline-block; vertical-align: middle"
+            >Menu</ion-title
+          >
+          <ion-img
+            src="../../assets/visualizadorKinetico.png"
+            style="
+              display: inline-block;
+              width: 2.5rem;
+              vertical-align: middle;
+              margin-left: 10rem;
+            "
+          ></ion-img>
+        </ion-toolbar>
+      </ion-header>
+    </div>
+
     <ion-grid style="display: flex; flex-flow: column">
-      <ion-row style="flex-grow: 1; margin-bottom: 1rem">
+      <ion-row style="flex-grow: 1; margin-bottom: 1rem; margin-top: 4rem">
         <ion-col class="cosas-lindas-btn" (click)="chooseMenu(1)">
           <h2>COSAS LINDAS</h2>
         </ion-col>
@@ -13,62 +53,102 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
-    <ion-grid style="display: flex; flex-flow: column">
-      <ion-row style="flex-grow: 1">
-        <ion-col>
-          <button class="btn btn-danger" (click)="logoutUser()">
-            Cerrar Sesión
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
   </div>
 
   <!-- MENU COSAS LINDAS Y FEAS-->
   <div style="width: 100%; height: 100%" *ngIf="menu == 1 || menu == 2">
-    <ion-grid style="height: 10%">
-      <ion-row style="flex-grow: 1">
-        <ion-col style="display: flex; justify-content: space-between">
-          <button
-            class="btn btn-menu-cl btns-cosas-lindas"
-            (click)="chooseMenu(0)"
+    <ion-menu contentId="main-content">
+      <ion-header>
+        <ion-toolbar color="light">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" style="--background: rgb(255, 217, 157)"
+        ><ion-grid style="display: flex; flex-flow: column">
+          <ion-row>
+            <ion-col>
+              <button
+                class="btn btn-menu-cl btns-cosas-lindas"
+                (click)="chooseMenu(0)"
+              >
+                Menu Principal
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button
+                class="btn btn-menu-cl btns-cosas-lindas"
+                (click)="seeOwnImages()"
+              >
+                Mis Imágenes
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="menu==1">
+            <ion-col>
+              <button
+                class="btn btn-menu-cl btns-cosas-lindas"
+                (click)="chooseMenu(3)"
+              >
+                Ver Gráfico
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="menu==2">
+            <ion-col>
+              <button
+                class="btn btn-menu-cl btns-cosas-lindas"
+                (click)="chooseMenu(4)"
+              >
+                Ver Gráfico
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row style="flex-grow: 1">
+            <ion-col>
+              <button class="btn btn-danger" (click)="logoutUser()">
+                Cerrar Sesión
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid></ion-content
+      >
+    </ion-menu>
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar style="background: #fff" color="dark">
+          <ion-buttons slot="start" style="color: #000">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title style="display: inline-block; vertical-align: middle"
+            >Menu</ion-title
           >
-            Menu Principal
-          </button>
-          <button
-            class="btn btn-sesion-cl btns-cosas-lindas"
-            (click)="logoutUser()"
-          >
-            Cerrar Sesión
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+          <ion-img
+            src="../../assets/visualizadorKinetico.png"
+            style="
+              display: inline-block;
+              width: 2.5rem;
+              vertical-align: middle;
+              margin-left: 10rem;
+            "
+          ></ion-img>
+        </ion-toolbar>
+      </ion-header>
+    </div>
     <ion-grid style="height: 80%; display: flex; flex-flow: column">
       <h1
         style="
           text-align: center;
           font-size: 2rem;
-          margin-top: 1.5rem;
+          margin-top: 4rem;
           font-weight: bolder;
+          color: #000;
+          text-shadow: 1px 1px 1px #f00;
         "
       >
         {{menuTittle}}
       </h1>
-
-      <div *ngIf="!userImagesCosasLindas && !userImagesCosasFeas">
-        <h2 class="mis-fotos" (click)="seeOwnImages()">Mis Imágenes</h2>
-        <div class="btn-tomar-foto" (click)="addPhotoToGallery()">
-          <h2>TOMAR FOTO</h2>
-        </div>
-        <h2 *ngIf="menu==1" class="grafico" (click)="chooseMenu(3)">
-          Ver Gráfico
-        </h2>
-        <h2 *ngIf="menu==2" class="grafico" (click)="chooseMenu(4)">
-          Ver Gráfico
-        </h2>
-      </div>
 
       <!-- LISTADO DE IMAGENES COSAS LINDAS -->
       <div style="margin-top: 1rem" *ngIf="menu == 1 && !userImagesCosasLindas">
@@ -82,6 +162,8 @@
                 width: 100%;
                 border: 3px solid rgb(218, 218, 218);
                 border-radius: 10px;
+                margin-bottom: 1rem;
+                box-shadow: 10px 10px 10px #000;
               "
               color="light"
             >
@@ -119,10 +201,23 @@
 
       <!-- LISTADO DE IMAGENES COSAS LINDAS PROPIAS DEL USUARIO -->
       <div style="margin-top: 1rem" *ngIf="menu == 1 && userImagesCosasLindas">
-        <h2 style="text-align: center; margin-bottom: 2rem">
+        <h2
+          style="
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 1px #000;
+          "
+        >
           {{user.userName}}
         </h2>
-        <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.3rem">
+        <h2
+          style="
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 1px #000;
+          "
+        >
           Listado de mis imágenes:
         </h2>
 
@@ -134,6 +229,7 @@
                 height: 50vh;
                 border: 3px solid rgb(218, 218, 218);
                 border-radius: 10px;
+                box-shadow: 10px 10px 10px #000;
               "
               color="light"
               data-index="i"
@@ -163,6 +259,7 @@
                 width: 100%;
                 border: 3px solid rgb(218, 218, 218);
                 border-radius: 10px;
+                box-shadow: 10px 10px 10px #000;
               "
               color="light"
               data-index="i"
@@ -201,10 +298,23 @@
 
       <!-- LISTADO DE IMAGENES COSAS FEAS PROPIAS DEL USUARIO -->
       <div style="margin-top: 1rem" *ngIf="menu == 2 && userImagesCosasFeas">
-        <h2 style="text-align: center; margin-bottom: 2rem">
+        <h2
+          style="
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 1px #000;
+          "
+        >
           {{user.userName}}
         </h2>
-        <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.3rem">
+        <h2
+          style="
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 1px #000;
+          "
+        >
           Listado de mis imágenes:
         </h2>
         <ion-slides #slides>
@@ -215,6 +325,7 @@
                 height: 50vh;
                 border: 3px solid rgb(218, 218, 218);
                 border-radius: 10px;
+                box-shadow: 10px 10px 10px #000;
               "
               color="light"
               data-index="i"
@@ -231,30 +342,76 @@
           </ion-slide>
         </ion-slides>
       </div>
+
+      <div *ngIf="!userImagesCosasLindas && !userImagesCosasFeas">
+        <div class="btn-tomar-foto" (click)="addPhotoToGallery()">
+          <h2>TOMAR FOTO</h2>
+        </div>
+      </div>
     </ion-grid>
   </div>
 
   <!-- PIPE CHART -->
   <div *ngIf="menu == 3">
+    <ion-menu contentId="main-content">
+      <ion-header>
+        <ion-toolbar color="light">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" style="--background: rgb(255, 217, 157)"
+        ><ion-grid style="display: flex; flex-flow: column">
+          <ion-row>
+            <ion-col>
+              <button
+                class="btn btn-menu-cl btns-cosas-lindas"
+                (click)="chooseMenu(0)"
+              >
+                Menu Principal
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row style="flex-grow: 1">
+            <ion-col>
+              <button class="btn btn-danger" (click)="logoutUser()">
+                Cerrar Sesión
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid></ion-content
+      >
+    </ion-menu>
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar style="background: #fff" color="dark">
+          <ion-buttons slot="start" style="color: #000">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title style="display: inline-block; vertical-align: middle"
+            >Menu</ion-title
+          >
+          <ion-img
+            src="../../assets/visualizadorKinetico.png"
+            style="
+              display: inline-block;
+              width: 2.5rem;
+              vertical-align: middle;
+              margin-left: 10rem;
+            "
+          ></ion-img>
+        </ion-toolbar>
+      </ion-header>
+    </div>
     <script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
-    <ion-row style="flex-grow: 1">
-      <ion-col style="display: flex; justify-content: space-between">
-        <button
-          class="btn btn-menu-cl btns-cosas-lindas"
-          (click)="chooseMenu(0)"
-        >
-          Menu Principal
-        </button>
-        <button
-          class="btn btn-sesion-cl btns-cosas-lindas"
-          (click)="logoutUser()"
-        >
-          Cerrar Sesión
-        </button>
-      </ion-col>
-    </ion-row>
-
-    <h2 style="text-align: center; margin-top: 3rem; font-size: 2.3rem">
+    <h2
+      style="
+        text-align: center;
+        margin-top: 4rem;
+        font-size: 2.3rem;
+        color: #000;
+        text-shadow: 1px 1px 1px #f00;
+      "
+    >
       GRÁFICO DE COSAS LINDAS
     </h2>
     <div class="pipe-chart-container">
@@ -264,24 +421,65 @@
 
   <!-- BAR CHART -->
   <div *ngIf="menu == 4">
-    <ion-row style="flex-grow: 1">
-      <ion-col style="display: flex; justify-content: space-between">
-        <button
-          class="btn btn-menu-cl btns-cosas-lindas"
-          (click)="chooseMenu(0)"
-        >
-          Menu Principal
-        </button>
-        <button
-          class="btn btn-sesion-cl btns-cosas-lindas"
-          (click)="logoutUser()"
-        >
-          Cerrar Sesión
-        </button>
-      </ion-col>
-    </ion-row>
+    <ion-menu contentId="main-content">
+      <ion-header>
+        <ion-toolbar color="light">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" style="--background: rgb(255, 217, 157)"
+        ><ion-grid style="display: flex; flex-flow: column">
+          <ion-row>
+            <ion-col>
+              <button
+                class="btn btn-menu-cl btns-cosas-lindas"
+                (click)="chooseMenu(0)"
+              >
+                Menu Principal
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row style="flex-grow: 1">
+            <ion-col>
+              <button class="btn btn-danger" (click)="logoutUser()">
+                Cerrar Sesión
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid></ion-content
+      >
+    </ion-menu>
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar style="background: #fff" color="dark">
+          <ion-buttons slot="start" style="color: #000">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title style="display: inline-block; vertical-align: middle"
+            >Menu</ion-title
+          >
+          <ion-img
+            src="../../assets/visualizadorKinetico.png"
+            style="
+              display: inline-block;
+              width: 2.5rem;
+              vertical-align: middle;
+              margin-left: 10rem;
+            "
+          ></ion-img>
+        </ion-toolbar>
+      </ion-header>
+    </div>
 
-    <h2 style="text-align: center; margin-top: 5rem; font-size: 2.3rem">
+    <h2
+      style="
+        text-align: center;
+        margin-top: 5rem;
+        font-size: 2.3rem;
+        color: #000;
+        text-shadow: 1px 1px 1px #f00;
+      "
+    >
       GRÁFICO DE COSAS FEAS
     </h2>
     <div class="bar-chart-container">

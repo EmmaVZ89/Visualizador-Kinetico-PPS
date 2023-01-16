@@ -33,6 +33,8 @@ import {
   DeviceMotionAccelerationData,
 } from '@ionic-native/device-motion/ngx';
 
+import { LoadingController, ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -57,13 +59,16 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   pipeChart: Chart;
   viewPipeChart: boolean;
 
+  loading: any;
+
   constructor(
     private router: Router,
     private authService: AuthService,
     private photoService: PhotoService,
     private firestoreService: FirestoreService,
     private ref: ChangeDetectorRef,
-    private deviceMotion: DeviceMotion
+    private deviceMotion: DeviceMotion,
+    private loadingController: LoadingController
   ) {
     Chart.register(
       BarElement,
@@ -82,9 +87,9 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   } // end of constructor
 
   ngOnInit(): void {
-    // Para formatear una fecha
-    // const fecha = moment(new Date(1663533813133)).format('DD-MM-YYYY HH:mm:ss');
+    this.showLoading("");
     this.authService.user$.subscribe((user: any) => {
+      this.loading.dismiss();
       if (user) {
         this.user = user;
 
@@ -150,23 +155,23 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
 
   // view = [0-menu botones | 1-menu cosas lindas | 2-menu cosas feas]
   chooseMenu(view: number) {
-    this.pressedButton = true;
+    this.showLoading("");
     if (view === 1) {
       setTimeout(() => {
         this.menu = 1;
         this.menuTittle = 'COSAS LINDAS';
-        this.pressedButton = false;
+        this.loading.dismiss();
       }, 2000);
     } else if (view === 2) {
       setTimeout(() => {
         this.menu = 2;
         this.menuTittle = 'COSAS FEAS';
-        this.pressedButton = false;
+        this.loading.dismiss();
       }, 2000);
     } else if (view === 3) {
       setTimeout(() => {
         this.menu = 3;
-        this.pressedButton = false;
+        this.loading.dismiss();
         setTimeout(() => {
           this.generatePipeChart();
         }, 1000);
@@ -174,7 +179,7 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     } else if (view === 4) {
       setTimeout(() => {
         this.menu = 4;
-        this.pressedButton = false;
+        this.loading.dismiss();
         setTimeout(() => {
           this.generateBarChart();
         }, 1000);
@@ -184,7 +189,7 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
         this.menu = 0;
         this.userImagesCosasLindas = false;
         this.userImagesCosasFeas = false;
-        this.pressedButton = false;
+        this.loading.dismiss();
       }, 2000);
     }
   }
@@ -199,9 +204,9 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
       likes: [],
     };
     this.photoService.addNewToGallery(photo, type).then(() => {
-      this.pressedButton = true;
+      this.showLoading("Subiendo foto...");
       setTimeout(() => {
-        this.pressedButton = false;
+        this.loading.dismiss();
       }, 2000);
     });
   } // end of addPhotoToGallery
@@ -234,12 +239,10 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
 
     photo.hour = this.convertDateToUnix(photo);
 
-    this.firestoreService.updateImage(photo, photo.id, collection);
-
-    // this.pressedButton = true;
-    // setTimeout(() => {
-    //   this.pressedButton = false;
-    // }, 1500);
+    this.showLoading("");
+    this.firestoreService.updateImage(photo, photo.id, collection).then(()=>{
+      this.loading.dismiss();
+    });
   } // end of voteImage
 
   convertDateToUnix(photo: any) {
@@ -259,9 +262,9 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   } // end of convertDateToUnix
 
   seeOwnImages() {
-    this.pressedButton = true;
+    this.showLoading("");
     setTimeout(() => {
-      this.pressedButton = false;
+      this.loading.dismiss();
       this.userImagesCosasLindas = true;
       this.userImagesCosasFeas = true;
       this.imagenesUsuario = [];
@@ -482,4 +485,17 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
       },
     });
   } // end of generateBarChart
+
+  async showLoading(message: string) {
+    try {
+      this.loading = await this.loadingController.create({
+        message: message,
+        spinner: 'crescent',
+        showBackdrop: true,
+      });
+      this.loading.present();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 }

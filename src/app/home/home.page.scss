@@ -1,18 +1,15 @@
 // MENU PRINCIPAL
 ion-content {
-  --background: rgb(191, 182, 182);
+  --background: rgb(246, 154, 4);
   --background: linear-gradient(
-    325deg,
-    rgba(191, 182, 182, 1) 14%,
-    rgba(0, 0, 0, 0.8468429608171394) 39%,
-    rgba(0, 0, 0, 1) 68%,
-    rgba(0, 0, 0, 1) 68%,
-    rgba(0, 0, 0, 1) 73%
+    15deg,
+    rgba(246, 154, 4, 1) 48%,
+    rgba(246, 219, 4, 1) 100%
   );
   overflow: hidden;
   position: relative;
   .cosas-lindas-btn {
-    background: url("../../assets/cosa-linda.jpg");
+    background: url("../../assets/edificio-lindo.jpg");
     background-size: cover;
     background-position: center;
     border-radius: 15px;
@@ -20,11 +17,12 @@ ion-content {
     text-align: center;
     margin-bottom: 10px;
     height: 40vh;
+    box-shadow: 10px 10px 10px #000;
     h2 {
       font-size: 1.8rem;
       font-weight: bolder;
       line-height: 14rem;
-      background: rgba(0, 0, 0, 0.212);
+      background: rgba(255, 0, 0, 0.212);
       border-radius: 15px;
       text-shadow: 2px 2px 4px #000;
     }
@@ -34,7 +32,7 @@ ion-content {
     transition: transform 0.3s;
   }
   .cosas-feas-btn {
-    background: url("../../assets/cosa-fea3.jpg");
+    background: url("../../assets/edificio-feo.jpg");
     background-size: cover;
     background-position: center;
     border-radius: 15px;
@@ -42,11 +40,12 @@ ion-content {
     text-align: center;
     box-shadow: 2px 2px 3px #000;
     height: 40vh;
+    box-shadow: 10px 10px 10px #000;
     h2 {
       font-size: 1.8rem;
       font-weight: bolder;
       line-height: 14rem;
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(255, 0, 0, 0.212);
       border-radius: 15px;
       text-shadow: 2px 2px 4px #000;
     }
@@ -61,12 +60,21 @@ ion-content {
     margin-left: auto;
     margin-right: auto;
     border: 2px solid #fff;
-    box-shadow: 2px 2px 3px #000;
+    box-shadow: 10px 10px 10px #000;
   }
   .btn-danger:active {
     transform: scale(1.1);
     transition: transform 0.3s;
   }
+}
+
+ion-menu::part(backdrop) {
+  background-color: rgba(255, 0, 255, 0.5);
+}
+
+ion-menu::part(container) {
+  border-radius: 0 20px 20px 0;
+  box-shadow: 4px 0px 16px rgba(255, 0, 255, 0.18);
 }
 
 ion-spinner {
@@ -80,11 +88,18 @@ ion-spinner {
 
 // MENU COSAS LINDAS Y FEAS
 .btns-cosas-lindas {
-  width: 45%;
+  width: 15rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 10px 10px 10px #000;
   color: #fff;
   text-align: center;
   border: 2px solid #fff;
   border-radius: 10px;
+}
+.btns-cosas-lindas:hover {
+  color: #000;
 }
 .btns-cosas-lindas:active {
   transform: scale(0.9);
@@ -127,6 +142,7 @@ ion-spinner {
 .btn-tomar-foto {
   display: block;
   margin-top: 1rem;
+  margin-bottom: 2rem;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
@@ -137,11 +153,12 @@ ion-spinner {
   border-radius: 15px;
   border: 3px solid rgb(255, 255, 255);
   text-align: center;
+  box-shadow: 10px 10px 10px #000;
   h2 {
     font-size: 1.8rem;
     font-weight: bolder;
     line-height: 16rem;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(95, 1, 1, 0.25);
     border-radius: 15px;
     text-shadow: 3px 3px 8px #000;
   }
@@ -157,7 +174,7 @@ ion-spinner {
   height: 12rem;
   object-fit: cover;
 }
-.img-cosas-lindas-usuario{
+.img-cosas-lindas-usuario {
   width: 100%;
   height: 18rem;
   object-fit: cover;
@@ -183,7 +200,7 @@ ion-spinner {
   display: inline-block;
   position: relative;
   width: 100%;
-  height: 50vh!important;
+  height: 50vh !important;
   margin: auto;
   margin-top: 2rem;
 }
